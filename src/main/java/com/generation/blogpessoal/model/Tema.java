@@ -21,7 +21,7 @@ public class Tema {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "O campo descrição não pode estar vazioo.") //não pode ser branco
+	@NotBlank(message = "O campo descrição não pode estar vazio.") //não pode ser branco
 	@Size(min = 4, max = 50, message = "O campo descrição precisa ter entre 4 e 50 caracteres.") //tamanho da descrição
 	private String descricao;
 	

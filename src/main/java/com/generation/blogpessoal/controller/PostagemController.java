@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 
 @RestController //anotação que diz para spring que essa é uma controladora de rotas e acesso aos metodos
 @RequestMapping("/postagens") //rota para chegar nessa classe (insomnia)
-@CrossOrigin(origins = "*", allowedHeaders = "*") // liberar o acesso a outras máquinas
+@CrossOrigin(origins = "*", allowedHeaders = "*") // liberar o acesso a outras máquinas/servidores de fora (IP), o asterisco equivale a todas origens. E a todos os cabeçalhos. (má prática)  
 public class PostagemController {
 
 	@Autowired //injeção de dependências - mesma coisa de instanciar a classe PostagemRepository
