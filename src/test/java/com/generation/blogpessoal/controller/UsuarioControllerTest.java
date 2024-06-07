@@ -27,21 +27,19 @@ public class UsuarioControllerTest {
 	
 	//mesmas injeções de dependências da UsuarioController (a classe original)
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository; //poder ter acesso ao banco de dados
 	
 	@Autowired
-	private UsuarioService usuarioService;
+	private UsuarioService usuarioService; // acesso às funções do service
 
-	//injeção padrão de testes
+	//injeção padrão de testes - faz o serviço do insomnia
 	@Autowired
 	private TestRestTemplate testRestTemplate; 
-	
-	//Garante que não tem nenhum usuário no banco e depois cria o usuário root (ex). 
-	//para startar ele primeiro deleta todos os usuários para garantir que há apenas 1 e dps incrementa o id.  
-	@BeforeAll
+		
+	@BeforeAll // anotação com diogo: garante que esse bloco vai rodar antes de tudo, de todos os testes
 	void start() { 
-		usuarioRepository.deleteAll();
-		usuarioService.cadastrarUsuario(new Usuario(0L, "root", "root@root.com", "rootroot", ""));
+		usuarioRepository.deleteAll(); //para startar ele primeiro deleta todos os usuários para garantir que há apenas 1 e dps incrementa o id.
+		usuarioService.cadastrarUsuario(new Usuario(0L, "root", "root@root.com", "rootroot", "")); // Após garantir que não tem nenhum usuário no banco e depois cria o usuário root (ex). 
 	}
 	@Test
 	@DisplayName("Deve cadastrar um novo usuário.") // como quero que o teste apareça no relatório
@@ -66,9 +64,9 @@ public class UsuarioControllerTest {
 				new Usuario (0L, "Maria da Silva", "maria_silva@email.com.br", "123456789", "-"));
 		
 		ResponseEntity<Usuario> corpoResposta = testRestTemplate
-				.exchange("/usuarios/cadastrar", HttpMethod.POST, corpoRequisicao, Usuario.class);
+				.exchange("/usuarios/cadastrar", HttpMethod.POST, corpoRequisicao, Usuario.class); //exchange é como clicar no send do insomnia, envia os dados para post
 		
-		assertEquals(HttpStatus.BAD_REQUEST, corpoResposta.getStatusCode());
+		assertEquals(HttpStatus.BAD_REQUEST, corpoResposta.getStatusCode()); //avalia se o status retorno/resposta é igual o retorno esperado
 	}
 
 	
